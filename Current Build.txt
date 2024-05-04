@@ -22,7 +22,7 @@ import Cosmetics/PetBoo
 
 ?item.right.state = 3
     equip quarterstaff
-    equip heavy hammer
+    equip @item.right@
 
 ?item.GetCooldown("blade") <= 0
 ^ & foe.count > 7
