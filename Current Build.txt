@@ -25,7 +25,7 @@ import Cosmetics/PetBoo
     equip heavy hammer
 
 ?item.GetCooldown("blade") <= 0
-^foe.count > 7
+^ & foe.count > 7
     equip blade
     activate R
 
