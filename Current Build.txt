@@ -29,11 +29,11 @@ import Cosmetics/PetBoo
     equip blade
     activate R
 
-?item.GetCooldown("skeleton arm") <= 0
+?item.GetCooldown("skeleton_arm") <= 0
 ^ & foe.distance <= 6
-    equip skeleton arm
+    equip skeleton_arm
 
-    ?item.CanActivate("skeleton arm")
+    ?item.CanActivate("skeleton_arm")
         activate R
 
 ?foe = boss & item.GetCooldown("bardiche") <= 0
