@@ -1,0 +1,44 @@
+// When powered on, the Mind Stone continuously
+// executes instructions given to it.
+// Instructions must be scribed in Stonescript.
+// Learn more at:
+// StoneStoryRPG.com/
+
+import Cosmetics/Hats/Helmet
+import Cosmetics/Hats/Skully
+import Cosmetics/PetBoo
+
+?hp <= 10
+    activate potion
+
+?foe.distance > 11
+    equipL crossbow
+    equipR dashing shield
+:
+    loadout 3
+
+?pickup.distance < 15
+    equipL star stone
+
+?item.right.state = 3
+    equip quarterstaff
+    equip heavy hammer
+
+?item.GetCooldown("blade") <= 0
+^foe.count > 7
+    equip blade
+    activate R
+
+?item.GetCooldown("skeleton arm") <= 0
+^ & foe.distance <= 6
+    equip skeleton arm
+
+    ?item.CanActivate("skeleton arm")
+        activate R
+
+?foe = boss & item.GetCooldown("bardiche") <= 0
+^ & foe.distance <= 9
+    equip bardiche
+
+    ?item.CanActivate("bardiche")
+        activate R
