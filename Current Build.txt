@@ -8,8 +8,10 @@ import Cosmetics/Hats/Helmet
 import Cosmetics/Hats/Skully
 import Cosmetics/PetBoo
 
-func usePotion(healthThreshold)
-    ?hp <= healthThreshold
+var HEALTH_THRESHOLD = 5
+
+func usePotion()
+    ?hp <= HEALTH_THRESHOLD
         activate potion
 
 func baseLoadout()
@@ -50,19 +52,21 @@ func activateBlade()
 //         activate R
 
 func activateBardiche()
+    > @item.GetCooldown("bardiche")@
     ?foe = boss & item.GetCooldown("bardiche") <= 0
     ^ & foe.distance <= 9
         equip bardiche
         activate R
 
 func activateCultist()
+    > @item.GetCooldown("cultist")@
     ?foe = boss & item.GetCooldown("cultist") <= 0
     ^ & foe.distance < 15
         equip cultist
         activate R
 
 func main()
-    usePotion(5)
+    usePotion()
     baseLoadout()
     aacTwoHand() //aac for left and right hand to be implemented
     activateBlade()
