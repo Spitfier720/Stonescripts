@@ -31,7 +31,7 @@ import Cosmetics/PetBoo
 
 ?item.GetCooldown("skeleton_arm") <= 0
 ^ & foe.distance <= 6
-    equip skeleton_arm
+    equip skeleton arm
 
     ?item.CanActivate("skeleton_arm")
         activate R
@@ -39,12 +39,9 @@ import Cosmetics/PetBoo
 ?foe = boss & item.GetCooldown("bardiche") <= 0
 ^ & foe.distance <= 9
     equip bardiche
+    activate R
 
-    ?item.CanActivate("bardiche")
-        activate R
-
-?foe = boss & item.GetCooldown("cultist_mask") <= 0
-    equip cultist_mask
-
-    ?item.CanActivate("cultist_mask")
-        activate R
+?foe = boss & item.GetCooldown("cultist") <= 0
+^ & foe.distance < 15
+    equip cultist
+    activate R
