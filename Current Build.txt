@@ -8,40 +8,66 @@ import Cosmetics/Hats/Helmet
 import Cosmetics/Hats/Skully
 import Cosmetics/PetBoo
 
-?hp <= 10
-    activate potion
+func usePotion(healthThreshold)
+    ?hp <= healthThreshold
+        activate potion
 
-?foe.distance > 11
-    equipL crossbow
-    equipR dashing shield
-:
-    loadout 3
+func baseLoadout()
+    ?foe.distance > 11
+        equipL crossbow
+        equipR dashing shield
+    :
+        loadout 3
 
-?pickup.distance < 15
-    equipL star stone
+    ?pickup.distance < 15
+        equipL star stone
 
-?item.right.state = 3
-    equip quarterstaff
-    equip @item.right@
+func aacTwoHand()
+    ?item.right.state = 3
+        equip quarterstaff
+        equip @item.right@
 
-?item.GetCooldown("blade") <= 0
-^ & foe.count >= 10
-    equip blade
-    activate R
+func activateBlade()
+    ?item.GetCooldown("blade") <= 0
+        var slideCount = 0
+        ?slideCount = 0
+            screen.Next()
+            slideCount = 20
+        
+        ?slideCount > 0
+            slideCount--
+            
+            ?slideCount = 0 & foe.count >= 10
+                equip blade
+                activate R
+                screen.ResetOffset()
 
-?item.GetCooldown("skeleton_arm") <= 0
-^ & foe.distance <= 6
-    equip skeleton arm
+// ?item.GetCooldown("skeleton_arm") <= 0
+// ^ & foe.distance <= 6
+//     equip skeleton arm
 
-    ?item.CanActivate("skeleton_arm")
+//     ?item.CanActivate("skeleton_arm")
+//         activate R
+
+func activateBardiche()
+    ?foe = boss & item.GetCooldown("bardiche") <= 0
+    ^ & foe.distance <= 9
+        equip bardiche
         activate R
 
-?foe = boss & item.GetCooldown("bardiche") <= 0
-^ & foe.distance <= 9
-    equip bardiche
-    activate R
+func activateCultist()
+    ?foe = boss & item.GetCooldown("cultist") <= 0
+    ^ & foe.distance < 15
+        equip cultist
+        activate R
 
-?foe = boss & item.GetCooldown("cultist") <= 0
-^ & foe.distance < 15
-    equip cultist
-    activate R
+func main()
+    usePotion(5)
+    baseLoadout()
+    aacTwoHand() //aac for left and right hand to be implemented
+    activateBlade()
+    // activateSkeletonArm() // maybe we implement this later
+    activateBardiche()
+    activateCultist()
+
+main()
