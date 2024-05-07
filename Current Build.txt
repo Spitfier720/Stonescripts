@@ -28,7 +28,7 @@ func aacTwoHand()
         equip @item.right@
 
 func activateBlade()
-    ?item.GetCooldown("blade") <= 0
+    ?item.GetCooldown("blade") <= 0 & foe.count > 7
         var slideCount = 0
         ?slideCount = 0
             screen.Next()
@@ -37,10 +37,10 @@ func activateBlade()
         ?slideCount > 0
             slideCount--
             
-            ?slideCount = 0 & foe.count >= 10
+            ?slideCount = 0 & foe.count >= 15 // foe count can be removed for this part
                 equip blade
                 activate R
-                screen.ResetOffset()
+            screen.ResetOffset()
 
 // ?item.GetCooldown("skeleton_arm") <= 0
 // ^ & foe.distance <= 6
