@@ -25,7 +25,7 @@ import Cosmetics/PetBoo
     equip @item.right@
 
 ?item.GetCooldown("blade") <= 0
-^ & foe.count > 7
+^ & foe.count >= 10
     equip blade
     activate R
 
@@ -41,4 +41,10 @@ import Cosmetics/PetBoo
     equip bardiche
 
     ?item.CanActivate("bardiche")
+        activate R
+
+?foe = boss & item.GetCooldown("cultist_mask") <= 0
+    equip cultist_mask
+
+    ?item.CanActivate("cultist_mask")
         activate R
