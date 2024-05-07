@@ -51,16 +51,19 @@ func activateBlade()
 //     ?item.CanActivate("skeleton_arm")
 //         activate R
 
+// TODO: Find out why my bardiche doesn't hit
 func activateBardiche()
-    > @item.GetCooldown("bardiche")@
+    var cooldown = item.GetCooldown("bardiche")
+    // > Bardiche Cooldown: @cooldown@
     ?foe = boss & item.GetCooldown("bardiche") <= 0
     ^ & foe.distance <= 9
         equip bardiche
         activate R
 
 func activateCultist()
-    > @item.GetCooldown("cultist")@
-    ?foe = boss & item.GetCooldown("cultist") <= 0
+    var cooldown = item.GetCooldown("mask")
+    //  Cultist Cooldown: @cooldown@
+    ?foe = boss & item.GetCooldown("mask") <= 0
     ^ & foe.distance < 15
         equip cultist
         activate R
